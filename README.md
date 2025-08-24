@@ -38,6 +38,10 @@
 
 A full-stack application that enables you to turn any document, resource, or piece of content into context that any LLM can use as a reference during chatting. This application allows you to pick and choose which LLM or Vector Database you want to use as well as supporting multi-user management and permissions.
 
+## 📊 Codebase Analysis
+
+🔍 **[**한국어 코드베이스 분석 보고서**](./CODEBASE_ANALYSIS.md)** - AnythingLLM v1.8.5의 상세한 기술적 분석, 아키텍처 구조, 그리고 구현 세부사항에 대한 포괄적인 문서입니다.
+
 ![Chatting](https://github.com/Mintplex-Labs/anything-llm/assets/16845892/cfc5f47c-bd91-4067-986c-f3f49621a859)
 
 <details>

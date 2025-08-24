@@ -678,13 +678,16 @@ function apiWorkspaceEndpoints(app) {
           return;
         }
 
+        // Get API key prefix for user identification
+        const apiKeyPrefix = response.locals.bearerKey?.substring(0, 5) || null;
+        
         const result = await ApiChatHandler.chatSync({
           workspace,
           message,
           mode,
           user: null,
           thread: null,
-          sessionId: !!sessionId ? String(sessionId) : null,
+          sessionId: !!sessionId ? String(sessionId) : apiKeyPrefix,
           attachments,
           reset,
         });
@@ -830,6 +833,9 @@ function apiWorkspaceEndpoints(app) {
         response.setHeader("Connection", "keep-alive");
         response.flushHeaders();
 
+        // Get API key prefix for user identification
+        const apiKeyPrefix = response.locals.bearerKey?.substring(0, 5) || null;
+        
         await ApiChatHandler.streamChat({
           response,
           workspace,
@@ -837,7 +843,7 @@ function apiWorkspaceEndpoints(app) {
           mode,
           user: null,
           thread: null,
-          sessionId: !!sessionId ? String(sessionId) : null,
+          sessionId: !!sessionId ? String(sessionId) : apiKeyPrefix,
           attachments,
           reset,
         });

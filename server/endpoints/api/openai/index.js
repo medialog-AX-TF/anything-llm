@@ -140,6 +140,9 @@ function apiOpenAICompatibleEndpoints(app) {
         const history = messages.filter((chat) => chat.role !== "system") ?? [];
 
         if (!stream) {
+          // Get API key prefix for user identification
+          const apiKeyPrefix = response.locals.bearerKey?.substring(0, 5) || null;
+          
           const chatResult = await OpenAICompatibleChat.chatSync({
             workspace,
             systemPrompt,
@@ -147,6 +150,7 @@ function apiOpenAICompatibleEndpoints(app) {
             prompt: extractTextContent(userMessage.content),
             attachments: extractAttachments(userMessage.content),
             temperature: Number(temperature),
+            apiSessionId: apiKeyPrefix,
           });
 
           await Telemetry.sendTelemetry("sent_chat", {
@@ -169,6 +173,9 @@ function apiOpenAICompatibleEndpoints(app) {
         response.setHeader("Connection", "keep-alive");
         response.flushHeaders();
 
+        // Get API key prefix for user identification
+        const apiKeyPrefix = response.locals.bearerKey?.substring(0, 5) || null;
+        
         await OpenAICompatibleChat.streamChat({
           workspace,
           systemPrompt,
@@ -177,6 +184,7 @@ function apiOpenAICompatibleEndpoints(app) {
           attachments: extractAttachments(userMessage.content),
           temperature: Number(temperature),
           response,
+          apiSessionId: apiKeyPrefix,
         });
         await Telemetry.sendTelemetry("sent_chat", {
           LLMSelection: process.env.LLM_PROVIDER || "openai",

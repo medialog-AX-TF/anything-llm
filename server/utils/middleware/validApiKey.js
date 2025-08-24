@@ -14,12 +14,17 @@ async function validApiKey(request, response, next) {
     return;
   }
 
-  if (!(await ApiKey.get({ secret: bearerKey }))) {
+  const apiKey = await ApiKey.get({ secret: bearerKey });
+  if (!apiKey) {
     response.status(403).json({
       error: "No valid api key found.",
     });
     return;
   }
+
+  // Store API key information for later use
+  response.locals.apiKey = apiKey;
+  response.locals.bearerKey = bearerKey;
 
   next();
 }

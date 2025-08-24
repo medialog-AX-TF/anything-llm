@@ -254,7 +254,9 @@ const WorkspaceChats = {
         const user = res.user_id ? await User.get({ id: res.user_id }) : null;
         res.user = user
           ? { username: user.username }
-          : { username: res.api_session_id !== null ? "API" : "unknown user" };
+          : { username: res.api_session_id !== null 
+              ? (res.api_session_id.length >= 5 ? `API-${res.api_session_id.substring(0, 5)}` : `API-${res.api_session_id}`)
+              : "unknown user" };
       }
 
       return results;

@@ -14,6 +14,7 @@ async function chatSync({
   prompt = null,
   attachments = [],
   temperature = null,
+  apiSessionId = null,
 }) {
   const uuid = uuidv4();
   const chatMode = workspace?.chatMode ?? "chat";

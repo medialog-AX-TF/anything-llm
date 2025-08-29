@@ -1,0 +1,17 @@
+기업/솔루션 LLMOps 시스템 입니다.   
+LLM 을 활용하기 위한 워크스페이스와  API 를 제공합니다. 
+
+
+제공 모델 확인
+
+https://partner.novamsg.org:5004/api/docs/#/OpenAI%20Compatible%20Endpoints/get_v1_openai_models
+
+제공된 모델로 chat_completions
+https://partner.novamsg.org:5004/api/docs/#/OpenAI%20Compatible%20Endpoints/post_v1_openai_chat_completions
+
+
+아래는  LLMOps AP I 키를 발급받아   anthropic-claude-sonnet-4  모델을 활용하는 예제 입니다
+
+curl -X 'POST' \   'https://partner.novamsg.org:5004/api/v1/openai/chat/completions' \   -H 'accept: */*' \   -H 'Authorization: Bearer LLMOpsKey' \   -H 'Content-Type: application/json' \   -d '{   "messages": [     {       "role": "system",       "content": "You are a helpful assistant"     },     {       "role": "assistant",       "content": " assistant "     },     {       "role": "user",       "content": "당신은 누구 ?"     }   ],   "model": "anthropic-claude-sonnet-4",   "stream": false,   "temperature": 0.5 }'
+
+  "id": "da2a175e-915d-4f39-9387-93f9a7487207",   "object": "chat.completion",   "created": 1756015140,   "model": "anthropic-claude-sonnet-4",   "choices": [     {       "index": 0,       "message": {         "role": "assistant",         "content": "안녕하세요! 저는 Claude입니다. Anthropic에서 개발한 AI 어시스턴트예요. \n\n다양한 주제에 대해 대화하고, 질문에 답하고, 텍스트 작성이나 분석 등 여러 가지 작업을 도와드릴 수 있습니다. 궁금한 것이 있으시면 언제든 말씀해 주세요!"       },       "logprobs": null,       "finish_reason": "stop"     }   ],   "usage": {     "prompt_tokens": 38,     "completion_tokens": 134,     "total_tokens": 172,     "outputTps": 56.540084388185655,     "duration": 2.398   }

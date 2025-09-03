@@ -1,0 +1,5 @@
+[33m4195e450[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m feat: Show API key prefix instead of 'unknown user' for API chats
+[33m6af4584b[m fix: Make npm scripts cross-platform compatible for Windows
+[33md17b280d[m docs: Add comprehensive Korean codebase analysis
+[33mbb7d65f0[m patch missing options resolves #4316
+[33m6358d087[m Fix /openai/models compat endpoint to return correct response schema resolves #4295

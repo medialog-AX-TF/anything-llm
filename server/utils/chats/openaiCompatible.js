@@ -43,6 +43,7 @@ async function chatSync({
         attachments,
       },
       include: false,
+      apiSessionId,
     });
 
     return formatJSON(
@@ -136,6 +137,7 @@ async function chatSync({
         attachments,
       },
       include: false,
+      apiSessionId,
     });
 
     return formatJSON(
@@ -194,6 +196,7 @@ async function chatSync({
       metrics,
       attachments,
     },
+    apiSessionId,
   });
 
   return formatJSON(
@@ -218,6 +221,7 @@ async function streamChat({
   prompt = null,
   attachments = [],
   temperature = null,
+  apiSessionId = null,
 }) {
   const uuid = uuidv4();
   const chatMode = workspace?.chatMode ?? "chat";
@@ -265,6 +269,7 @@ async function streamChat({
         attachments,
       },
       include: false,
+      apiSessionId,
     });
 
     writeResponseChunk(
@@ -366,6 +371,7 @@ async function streamChat({
         attachments,
       },
       include: false,
+      apiSessionId,
     });
 
     writeResponseChunk(
@@ -441,6 +447,7 @@ async function streamChat({
         metrics: stream.metrics,
         attachments,
       },
+      apiSessionId,
     });
 
     writeResponseChunk(

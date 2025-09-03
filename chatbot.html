@@ -1,11 +1,85 @@
-<!--
-Paste this script at the bottom of your HTML before the </body> tag.
-See more style and config options on our docs
-https://github.com/Mintplex-Labs/anythingllm-embed/blob/main/README.md
--->
-<script
-data-embed-id="52e2353e-b70c-47be-bd8f-7c7fded26508"
-data-base-api-url="http://localhost:3001/api/embed"
-src="http://localhost:3000/embed/anythingllm-chat-widget.min.js">
-</script>
-<!-- AnythingLLM (https://anythingllm.com) -->
+ <!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AnythingLLM 챗봇 데모</title>
+  <style>
+    :root { --bg:#0b1020; --card:#121a2e; --text:#e8ecf3; --muted:#9fb0c3; --accent:#5aa9ff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; background:linear-gradient(180deg, #0b1020 0%, #0a0f1e 100%); color:var(--text); }
+    header { padding:28px 20px; border-bottom:1px solid rgba(255,255,255,0.06); position:sticky; top:0; backdrop-filter: blur(6px); background:rgba(11,16,32,0.6); }
+    .wrap { max-width:960px; margin:0 auto; padding:20px; }
+    .hero { display:grid; grid-template-columns:1.2fr 1fr; gap:24px; align-items:center; }
+    .card { background:var(--card); border:1px solid rgba(255,255,255,0.06); border-radius:16px; padding:24px; box-shadow:0 10px 30px rgba(0,0,0,0.25); }
+    h1 { margin:0 0 8px; font-size:28px; letter-spacing:-0.3px; }
+    p.lead { color:var(--muted); margin:0; }
+    .steps { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; margin-top:20px; }
+    .step { background:rgba(255,255,255,0.03); border:1px dashed rgba(255,255,255,0.09); border-radius:12px; padding:16px; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .footer { color:#93a6bd; font-size:13px; margin-top:14px; }
+    .btn { appearance:none; border:1px solid rgba(255,255,255,0.12); background:linear-gradient(180deg,#152342,#0f1a33); color:#e8ecf3; padding:12px 16px; border-radius:12px; font-weight:600; cursor:pointer; transition:.2s transform; }
+    .btn:hover { transform: translateY(-1px); }
+    @media (max-width: 880px) { .hero { grid-template-columns: 1fr; } .steps{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <strong>AnythingLLM</strong> · 온프레미스 챗봇 위젯 데모
+    </div>
+  </header>
+
+  <div class="wrap">
+    <section class="hero">
+      <div class="card">
+        <h1>사내 웹에 챗봇 붙이기</h1>
+        <p class="lead">이 페이지는 <strong>AnythingLLM 임베드 위젯</strong>을 이용해 온프레미스 LLM 챗봇을 실행하는 최소 예제입니다. 아래 버튼을 누르거나 우측의 코드대로 적용하면 사이트 어디서든 대화가 가능합니다.</p>
+        <div style="display:flex; gap:12px; margin-top:18px;">
+          <button class="btn" onclick="window.scrollTo({top:document.body.scrollHeight, behavior:'smooth'})">설치 방법 보기</button>
+          <button class="btn" onclick="alert('위젯은 페이지 우하단 플로팅으로 자동 표시됩니다. 실제 대화는 해당 버튼으로 시작하세요!')">챗봇 사용 안내</button>
+        </div>
+        <p class="footer">실서비스 시에는 로컬호스트 대신 <em>사내 도메인</em>과 <em>HTTPS</em>를 사용하세요.</p>
+      </div>
+      <div class="card">
+        <h2 style="margin-top:0">빠른 확인 체크리스트</h2>
+        <ul style="line-height:1.6; margin:0; padding-left:18px;">
+          <li>AnythingLLM 서버가 동작 중이며 <code>/api/embed</code> 엔드포인트가 응답하는가?</li>
+          <li>위젯 JS 파일 경로(<code>/embed/anythingllm-chat-widget.min.js</code>)가 외부에서 접근 가능한가?</li>
+          <li><code>data-embed-id</code>가 올바른 워크스페이스 ID인가?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:16px;">
+      <h2 style="margin-top:0">설치 방법</h2>
+      <ol style="line-height:1.7;">
+        <li>아래 스니펫을 <strong><code>&lt;/body&gt;</code> 바로 위</strong>에 붙여넣습니다.</li>
+        <li><code>data-base-api-url</code>과 <code>src</code>에 사용 중인 서버 주소(도메인/포트)를 입력합니다.</li>
+        <li>필요 시 도메인에서 <strong>HTTPS</strong>와 <strong>리버스 프록시(NGINX)</strong>를 설정합니다.</li>
+      </ol>
+      <pre><code>&lt;!-- AnythingLLM Embed (https://anythingllm.com) --&gt;
+&lt;script
+  data-embed-id="52e2353e-b70c-47be-bd8f-7c7fded26508"
+  data-base-api-url="http://localhost:3001/api/embed"
+  src="http://localhost:3000/embed/anythingllm-chat-widget.min.js"&gt;
+&lt;/script&gt;
+&lt;!-- /AnythingLLM Embed --&gt;</code></pre>
+      <p class="footer">배포 환경에서는 <code>localhost</code> 대신 <code>https://your-internal-domain</code> 형식으로 교체하세요.</p>
+    </section>
+  </div>
+
+  <!-- 실제 위젯 스크립트 로드 (페이지 우하단에 플로팅으로 표시) -->
+  <!-- 로컬 테스트: 아래 값을 그대로 사용. 운영 배포 시 도메인/포트 교체 및 HTTPS 권장 -->
+  <script
+    data-embed-id="52e2353e-b70c-47be-bd8f-7c7fded26508"
+    data-base-api-url="http://localhost:3001/api/embed"
+    src="http://localhost:3000/embed/anythingllm-chat-widget.min.js">
+  </script>
+  <!-- AnythingLLM (https://anythingllm.com) -->
+
+  <noscript>
+    이 페이지를 사용하려면 자바스크립트를 활성화하세요.
+  </noscript>
+</body>
+</html>
